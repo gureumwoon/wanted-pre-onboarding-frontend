@@ -1,12 +1,12 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { styled } from "styled-components";
 import Button from "../elements/Button";
 import Input from "../elements/Input";
 import { apis } from "../apis/api";
-import { Todo } from "../types/TodoType";
+import { Todo, TodoList } from "../types/TodoType";
 
 function TodoForm() {
-    const [todoList, setTodoList] = useState<Todo[]>([]);
+    const [todoList, setTodoList] = useState<TodoList[]>([]);
     const [inputTodo, setInputTodo] = useState('')
 
     const handleCreateTodo = (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,6 +25,16 @@ function TodoForm() {
 
     }
 
+    useEffect(() => {
+        apis.getTodo()
+            .then((res) => {
+                console.log(res.data)
+                setTodoList(res.data)
+            }).catch((error) => {
+                console.log(error)
+            })
+    }, [])
+
     return (
         <TodoFormField>
             <InputForm onSubmit={handleCreateTodo}>
@@ -40,8 +50,8 @@ function TodoForm() {
                 {
                     todoList.map((todo) => {
                         return (
-                            <List>
-                                <Input label="ToDo1" type="checkbox" />
+                            <List key={todo.id}>
+                                <Input label={`${todo.todo}`} type="checkbox" />
                                 <Button dataTestId="modify-button" margin="0 8px 0 0">수정</Button>
                                 <Button dataTestId="delete-button" >삭제</Button>
                             </List>
@@ -85,6 +95,9 @@ const ListForm = styled.ul`
     box-sizing: border-box;
     background-color: #F7EA87;
     border-radius: 1rem;
+    li:last-child {
+        margin: 0;
+    }
 `
 
 const List = styled.li`
@@ -93,6 +106,7 @@ const List = styled.li`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 0 13px;
     label {
     display: flex;
     flex-flow: row-reverse;
