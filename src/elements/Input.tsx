@@ -4,6 +4,9 @@ import { InputProps, InputStyleProps } from "../types/elements/InputType";
 function Input(props: InputProps) {
     const {
         label,
+        dataTestId,
+        name,
+        value,
         type,
         size,
         placeholder,
@@ -16,6 +19,9 @@ function Input(props: InputProps) {
         <label>
             <LabelText >{label}</LabelText>
             <InputField
+                data-testid={dataTestId}
+                name={name}
+                value={value}
                 size={size}
                 type={type}
                 margin={margin}
