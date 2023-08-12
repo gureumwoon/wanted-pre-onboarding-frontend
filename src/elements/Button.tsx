@@ -2,10 +2,19 @@ import styled, { css } from "styled-components";
 import { ButtonProps, ButtonStyleProps } from "../types/elements/ButtonType";
 
 function Button(props: ButtonProps) {
-    const { children, size, _onClick, bg, margin, color } = props;
+    const { dataTestId, children, size, _onClick, _disabled, bg, margin, color } = props;
     const styles = { bg, margin, color }
     return (
-        <ButtonField {...styles} size={size} onClick={_onClick}>{children}</ButtonField>
+        <ButtonField
+            {...styles}
+            data-testid={dataTestId}
+            type="submit"
+            size={size}
+            onClick={_onClick}
+            disabled={_disabled}
+        >
+            {children}
+        </ButtonField>
     )
 }
 
@@ -36,7 +45,7 @@ const ButtonSizeStyle = css<ButtonStyleProps>`
 const ButtonField = styled.button<ButtonStyleProps>`
     ${ButtonSizeStyle}
     cursor: pointer;
-    background-color: ${(props) => props.bg || "cornflowerblue"};
+    background-color: ${(props) => props.disabled ? "#c4c4c4" : "cornflowerblue"};
     margin: ${(props) => props.margin};
     color: ${(props) => props.color || "white"};
     border-radius: 5px;
