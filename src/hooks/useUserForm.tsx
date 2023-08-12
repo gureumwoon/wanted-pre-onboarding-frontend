@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UserRequest } from '../types/elements/User';
+import { UserRequest } from '../types/User';
 
 export const useUserForm = (initialValues: UserRequest) => {
     const [userData, setUserData] = useState(initialValues);
