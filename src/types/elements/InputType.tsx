@@ -6,8 +6,9 @@ interface Props {
 export type InputStyleProps = Partial<Props>;
 
 export interface InputProps extends InputStyleProps {
+    className?: string;
     label?: string;
-    dataTestId: string;
+    dataTestId?: string;
     name?: string;
     value?: string;
     type?: string;
