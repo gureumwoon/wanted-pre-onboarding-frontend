@@ -2,28 +2,56 @@ import { styled } from "styled-components";
 import { useState } from "react"
 import Button from "../elements/Button";
 import Input from "../elements/Input";
-import { TodoList } from "../types/TodoType";
+import { TodoItemProps, TodoUpdateRequest } from "../types/TodoType";
+import { apis } from "../apis/api";
 
-function TodoItem({ todo }: TodoList) {
+function TodoItem({ todos, setTodoList }: TodoItemProps) {
+    console.log(todos)
+
     const [isModifyVer, setIsModifyVer] = useState(false);
+    const [modifyInput, setModifyInput] = useState(todos.todo);
+    const [isChecked, setIsChecked] = useState(todos.isCompleted);
 
-
-    const handleModifyTodo = () => {
-        setIsModifyVer(true)
+    // checkbox check여부
+    const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked) {
+            setIsChecked(true);
+        } else {
+            setIsChecked(false);
+        }
     }
+
+    // todo 수정 로직
+    const handleModifyTodo = () => {
+        const todoReq: TodoUpdateRequest = {
+            todo: modifyInput,
+            isCompleted: isChecked
+        }
+
+        apis.updateTodo(todos.id, todoReq)
+            .then((res) => {
+                setTodoList((prevTodoList) =>
+                    prevTodoList.map((todo) => todo.id === res.data.id ? { ...todo, todo: res.data.todo, isCompleted: res.data.isCompleted } : todo)
+                )
+                setIsModifyVer(false);
+            }).catch((error) => {
+                console.log("수정에러", error)
+            })
+    }
+
     return (
         <>
             {
                 !isModifyVer ?
                     <List>
-                        <Input label={`${todo}`} type="checkbox" />
-                        <Button dataTestId="modify-button" margin="0 8px 0 0" _onClick={handleModifyTodo}>수정</Button>
+                        <Input label={`${todos.todo}`} type="checkbox" value={modifyInput} _onChange={handleCheck} />
+                        <Button dataTestId="modify-button" margin="0 8px 0 0" _onClick={() => setIsModifyVer(true)}>수정</Button>
                         <Button dataTestId="delete-button" >삭제</Button>
                     </List> :
                     <ModifyList>
                         <ModiInput>
                             <Input type="checkbox" className="checkbox-label" />
-                            <Input dataTestId="modify-input" type="text" size="medium" className="modiInput-label" />
+                            <Input dataTestId="modify-input" type="text" size="medium" className="modiInput-label" value={modifyInput} _onChange={(e) => setModifyInput(e.target.value)} />
                         </ModiInput>
                         <Button dataTestId="modify-button" margin="0 8px 0 0" _onClick={handleModifyTodo}>제출</Button>
                         <Button dataTestId="cancel-button" >취소</Button>
