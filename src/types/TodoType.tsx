@@ -3,7 +3,18 @@ export interface Todo {
 };
 
 export interface TodoList extends Todo {
-    id: string;
+    id: number;
     isCompleted: boolean;
-    userId: string;
+    userId: number;
+}
+
+export interface TodoItemProps {
+    todos: TodoList;
+    // setTodoList는 TodoList[] 형태의 상태를 업데이트하는 함수
+    setTodoList: React.Dispatch<React.SetStateAction<TodoList[]>>;
+}
+
+export interface TodoUpdateRequest {
+    todo: string;
+    isCompleted: boolean;
 }
