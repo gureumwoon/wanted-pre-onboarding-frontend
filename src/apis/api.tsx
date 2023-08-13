@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { UserRequest } from "../types/User";
-import { Todo } from "../types/TodoType";
+import { Todo, TodoUpdateRequest } from "../types/TodoType";
 
 export const api: AxiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API,
@@ -27,6 +27,6 @@ export const apis = {
     // todo
     createTodo: (data: Todo) => api.post("/todos", data),
     getTodo: () => api.get("/todos"),
-    // updateTodo: (id, data) => api.put(`/todos/${id}}`, data),
+    updateTodo: (id: number, data: TodoUpdateRequest) => api.put(`/todos/${id}}`, data),
     // deleteTodo: (id) => api.delete(`/todos/${id}`)
 }
