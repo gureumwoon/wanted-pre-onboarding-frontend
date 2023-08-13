@@ -10,7 +10,6 @@ function TodoForm() {
     const [todoList, setTodoList] = useState<TodoList[]>([]);
     const [inputTodo, setInputTodo] = useState('')
 
-
     // todo 생성하기
     const handleCreateTodo = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -19,7 +18,6 @@ function TodoForm() {
         };
         apis.createTodo(todoRequest)
             .then((res) => {
-                console.log(res.data)
                 setTodoList([...todoList, res.data]);
                 setInputTodo('');
             }).catch((error) => {
@@ -52,8 +50,8 @@ function TodoForm() {
             </InputForm>
             <ListForm>
                 {
-                    todoList.map((todo) => {
-                        return <TodoItem key={todo.id} {...todo} />
+                    todoList.map((todos) => {
+                        return <TodoItem key={todos.id} setTodoList={setTodoList} todos={todos} />
                     })
                 }
             </ListForm>
