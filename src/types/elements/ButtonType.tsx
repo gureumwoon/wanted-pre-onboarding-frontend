@@ -11,5 +11,5 @@ export interface ButtonProps extends ButtonStyleProps {
     dataTestId: string;
     children: string;
     _onClick?: React.MouseEventHandler<HTMLElement>;
-    _disabled: boolean;
+    _disabled?: boolean;
 }
