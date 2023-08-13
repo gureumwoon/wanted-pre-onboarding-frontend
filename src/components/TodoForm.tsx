@@ -4,11 +4,14 @@ import Button from "../elements/Button";
 import Input from "../elements/Input";
 import { apis } from "../apis/api";
 import { Todo, TodoList } from "../types/TodoType";
+import TodoItem from "./TodoItem";
 
 function TodoForm() {
     const [todoList, setTodoList] = useState<TodoList[]>([]);
     const [inputTodo, setInputTodo] = useState('')
 
+
+    // todo 생성하기
     const handleCreateTodo = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const todoRequest: Todo = {
@@ -25,6 +28,7 @@ function TodoForm() {
 
     }
 
+    // todoList get 해오기
     useEffect(() => {
         apis.getTodo()
             .then((res) => {
@@ -49,13 +53,7 @@ function TodoForm() {
             <ListForm>
                 {
                     todoList.map((todo) => {
-                        return (
-                            <List key={todo.id}>
-                                <Input label={`${todo.todo}`} type="checkbox" />
-                                <Button dataTestId="modify-button" margin="0 8px 0 0">수정</Button>
-                                <Button dataTestId="delete-button" >삭제</Button>
-                            </List>
-                        )
+                        return <TodoItem key={todo.id} {...todo} />
                     })
                 }
             </ListForm>
@@ -97,34 +95,6 @@ const ListForm = styled.ul`
     border-radius: 1rem;
     li:last-child {
         margin: 0;
-    }
-`
-
-const List = styled.li`
-    width: 100%;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 13px;
-    label {
-    display: flex;
-    flex-flow: row-reverse;
-    align-items: center;
-    background-color: cornflowerblue;
-    border-radius: 5px;
-    padding: 6px 0;
-    box-sizing: border-box;
-    margin-right: 20px;
-    span {
-    color: white;
-    display: inline-block;
-    width: 80%;
-    }
-    input {
-        width: 20%;
-        height: 1.5rem;
-    }
     }
 `
 
