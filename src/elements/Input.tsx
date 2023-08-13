@@ -3,6 +3,7 @@ import { InputProps, InputStyleProps } from "../types/elements/InputType";
 
 function Input(props: InputProps) {
     const {
+        className,
         label,
         dataTestId,
         name,
@@ -16,20 +17,20 @@ function Input(props: InputProps) {
     } = props;
 
     return (
-        <label>
+        <Label className={className}>
             <LabelText >{label}</LabelText>
             <InputField
                 data-testid={dataTestId}
+                margin={margin}
                 name={name}
                 value={value}
                 size={size}
                 type={type}
-                margin={margin}
                 placeholder={placeholder}
                 onChange={_onChange}
                 onKeyUp={_onKeyUp}
             />
-        </label>
+        </Label>
     )
 }
 
@@ -49,15 +50,19 @@ const InputSize = css<InputStyleProps>`
         props.size === 'large' &&
         css`
         width: 100%;
-        height: 4.6rem;
-        font-size: 2rem;
+        height: 2.75rem;
+        font-size: 1rem;
     `
     }
 `
 
-const LabelText = styled.p`
+const Label = styled.label<InputStyleProps>`
+    width: 100%;
+`
+
+const LabelText = styled.span`
                 text-align: left;
-                font-size: 16px;
+                font-size: 1.5rem;
                 line-height: 20px;
                 color: #767676
                 `
