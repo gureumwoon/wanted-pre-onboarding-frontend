@@ -53,8 +53,8 @@ function TodoItem({ todos, setTodoList }: TodoItemProps) {
                             <Input type="checkbox" className="checkbox-label" />
                             <Input dataTestId="modify-input" type="text" size="medium" className="modiInput-label" value={modifyInput} _onChange={(e) => setModifyInput(e.target.value)} />
                         </ModiInput>
-                        <Button dataTestId="modify-button" margin="0 8px 0 0" _onClick={handleModifyTodo}>제출</Button>
-                        <Button dataTestId="cancel-button" >취소</Button>
+                        <Button dataTestId="submit-button" margin="0 8px 0 0" _onClick={handleModifyTodo}>제출</Button>
+                        <Button dataTestId="cancel-button" _onClick={() => setIsModifyVer(false)}>취소</Button>
                     </ModifyList>
             }
         </>
