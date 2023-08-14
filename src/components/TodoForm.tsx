@@ -70,7 +70,8 @@ function TodoForm() {
 }
 
 const TodoFormField = styled.div`
-    width: 60%;
+    width: 40%;
+    min-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;

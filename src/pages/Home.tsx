@@ -40,10 +40,12 @@ const SignUp = styled.div`
     p {
         font-size: 2rem;
         margin-right: 80px;
+        min-width: 300px;
     }
     button {
+        min-width: 240px;
         background-color: #F7EA87;
-        color: #000
+        color: #000;
     }
 `
 
@@ -57,6 +59,7 @@ const User = styled.div`
     p{
         font-size: 2rem;
         margin-right: 80px;
+        min-width: 300px;
     }
     div {
         display: flex;
