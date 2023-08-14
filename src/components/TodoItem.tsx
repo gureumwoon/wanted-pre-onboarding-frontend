@@ -5,9 +5,7 @@ import Input from "../elements/Input";
 import { TodoItemProps, TodoUpdateRequest } from "../types/TodoType";
 import { apis } from "../apis/api";
 
-function TodoItem({ todos, setTodoList }: TodoItemProps) {
-    console.log(todos)
-
+function TodoItem({ todos, setTodoList, handleDeleteTodo }: TodoItemProps) {
     const [isModifyVer, setIsModifyVer] = useState(false);
     const [modifyInput, setModifyInput] = useState(todos.todo);
     const [isChecked, setIsChecked] = useState(todos.isCompleted);
@@ -46,7 +44,7 @@ function TodoItem({ todos, setTodoList }: TodoItemProps) {
                     <List>
                         <Input label={`${todos.todo}`} type="checkbox" value={modifyInput} _onChange={handleCheck} />
                         <Button dataTestId="modify-button" margin="0 8px 0 0" _onClick={() => setIsModifyVer(true)}>수정</Button>
-                        <Button dataTestId="delete-button" >삭제</Button>
+                        <Button dataTestId="delete-button" _onClick={handleDeleteTodo} >삭제</Button>
                     </List> :
                     <ModifyList>
                         <ModiInput>
