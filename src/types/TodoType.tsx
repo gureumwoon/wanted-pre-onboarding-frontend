@@ -12,6 +12,7 @@ export interface TodoItemProps {
     todos: TodoList;
     // setTodoList는 TodoList[] 형태의 상태를 업데이트하는 함수
     setTodoList: React.Dispatch<React.SetStateAction<TodoList[]>>;
+    handleDeleteTodo: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export interface TodoUpdateRequest {
