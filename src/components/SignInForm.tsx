@@ -29,7 +29,7 @@ function SignInForm() {
             .then((res) => {
                 localStorage.setItem("access_token", res.data.access_token);
                 window.alert("환영합니다.")
-                navigate("/")
+                navigate("/todo")
             }).catch((error) => {
                 window.alert("이메일/비밀번호를 확인해 주세요.")
                 console.log(error);
