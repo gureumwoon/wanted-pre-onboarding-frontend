@@ -8,7 +8,7 @@ interface Props {
 export type ButtonStyleProps = Partial<Props>;
 
 export interface ButtonProps extends ButtonStyleProps {
-    dataTestId: string;
+    dataTestId?: string;
     children: string;
     _onClick?: React.MouseEventHandler<HTMLElement>;
     _disabled?: boolean;
