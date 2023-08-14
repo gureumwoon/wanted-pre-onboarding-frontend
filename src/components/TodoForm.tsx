@@ -26,6 +26,16 @@ function TodoForm() {
 
     }
 
+    // todo 삭제하기
+    const handleDelete = (id: number) => {
+        apis.deleteTodo(id)
+            .then(() => {
+                setTodoList((prevTodoList) => prevTodoList.filter(todo => todo.id !== id));
+            }).catch(error => {
+                console.log("삭제 에러", error);
+            });
+    }
+
     // todoList get 해오기
     useEffect(() => {
         apis.getTodo()
@@ -51,7 +61,7 @@ function TodoForm() {
             <ListForm>
                 {
                     todoList.map((todos) => {
-                        return <TodoItem key={todos.id} setTodoList={setTodoList} todos={todos} />
+                        return <TodoItem handleDeleteTodo={() => handleDelete(todos.id)} key={todos.id} setTodoList={setTodoList} todos={todos} />
                     })
                 }
             </ListForm>
