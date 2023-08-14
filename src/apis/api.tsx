@@ -28,5 +28,5 @@ export const apis = {
     createTodo: (data: Todo) => api.post("/todos", data),
     getTodo: () => api.get("/todos"),
     updateTodo: (id: number, data: TodoUpdateRequest) => api.put(`/todos/${id}}`, data),
-    // deleteTodo: (id) => api.delete(`/todos/${id}`)
+    deleteTodo: (id: number) => api.delete(`/todos/${id}`)
 }
